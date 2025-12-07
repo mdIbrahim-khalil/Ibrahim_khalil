@@ -23,15 +23,22 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-sm shadow-md py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-sm shadow-md py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full p-0.5 bg-gradient-to-tr from-teal-500 to-blue-500">
+              <img
+                src={PERSONAL_INFO.profileImage}
+                alt={PERSONAL_INFO.name}
+                className="h-full w-full rounded-full object-cover border-2 "
+              />
+            </div>
             <a href="#" className="text-2xl font-bold text-slate-900 tracking-tighter">
-              IK<span className="text-teal-600">.</span>
+              Ibrahim K<span className="text-teal-600">.</span>
             </a>
           </div>
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (

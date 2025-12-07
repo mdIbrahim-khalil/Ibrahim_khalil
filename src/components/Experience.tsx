@@ -1,6 +1,64 @@
-import React from 'react';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Briefcase, Calendar, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { EXPERIENCE } from '../constants';
+
+const ImageCarousel = ({ images }: { images: string[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prev = () => setCurrentIndex((curr) => (curr === 0 ? images.length - 1 : curr - 1));
+  const next = () => setCurrentIndex((curr) => (curr === images.length - 1 ? 0 : curr + 1));
+
+  if (!images || images.length === 0) return null;
+
+  return (
+    <div className="relative h-full min-h-[300px] w-full rounded-xl overflow-hidden shadow-md group bg-slate-200">
+      <div
+        className="absolute inset-0 transition-transform duration-500 ease-out flex"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`Experience slide ${idx + 1}`}
+            className="w-full h-full object-cover flex-shrink-0"
+          />
+        ))}
+      </div>
+
+      {images.length > 1 && (
+        <>
+          <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={prev}
+              className="p-1 rounded-full bg-white/80 text-slate-800 hover:bg-white shadow-sm transition-all"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={next}
+              className="p-1 rounded-full bg-white/80 text-slate-800 hover:bg-white shadow-sm transition-all"
+              aria-label="Next image"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+            {images.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all ${currentIndex === idx ? "bg-white w-4" : "bg-white/50"
+                  }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 const Experience: React.FC = () => {
   return (
@@ -15,16 +73,16 @@ const Experience: React.FC = () => {
           {/* Vertical line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 transform md:-translate-x-1/2"></div>
 
-          <div className="space-y-12">
+          <div className="space-y-16">
             {EXPERIENCE.map((job, index) => (
-              <div key={index} className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                
+              <div key={index} className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} items-stretch`}>
+
                 {/* Timeline dot */}
                 <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-teal-600 border-4 border-white shadow-sm transform -translate-x-1/2 mt-6 z-10"></div>
 
-                {/* Content */}
-                <div className="ml-12 md:ml-0 md:w-1/2 md:px-8">
-                  <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                {/* Content Side */}
+                <div className="ml-12 md:ml-0 md:w-1/2 md:px-8 mb-8 md:mb-0">
+                  <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow h-full">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
                       <div>
                         <h3 className="text-xl font-bold text-slate-900">{job.role}</h3>
@@ -71,6 +129,18 @@ const Experience: React.FC = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Carousel Side (fills empty space) */}
+                <div className="hidden md:block md:w-1/2 md:px-8">
+                  {job.images && job.images.length > 0 ? (
+                    <div className="sticky top-24 h-full max-h-[500px]">
+                      <ImageCarousel images={job.images} />
+                    </div>
+                  ) : (
+                    <div className="h-full min-h-[300px]"></div>
+                  )}
+                </div>
+
               </div>
             ))}
           </div>

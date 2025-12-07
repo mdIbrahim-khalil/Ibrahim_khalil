@@ -6,7 +6,8 @@ export const PERSONAL_INFO = {
   role: "Software Engineer (Data & ML)",
   summary: "Software Engineer with 4+ years of experience architecting scalable ETL pipelines and MLOps infrastructure. Expert in building distributed data systems using Apache Airflow, Kafka, and Spark within Azure and Kubernetes environments. Proven track record of automating complex data workflows and deploying production-grade ML models.",
   location: "Dhaka, Bangladesh",
-  resume: "resume.pdf", // Ensure this file exists in your public directory
+  resume: "ibrahim_cv_ac.pdf", // Ensure this file exists in your public directory
+  profileImage: "profile.jpeg", // Placeholder profile image
   contact: {
     email: "bsse1009@iit.du.ac.bd",
     phone: "+880 179 843 9302",
@@ -48,6 +49,12 @@ export const EXPERIENCE: Experience[] = [
     description: [
       "Mentored junior engineers in web development (HTTP, REST, clean code) and conducted workshops on Data Engineering."
     ],
+    images: [
+      "cefalo-1.jpeg",
+      "cefalo-2.jpeg",
+      "cefalo-3.jpeg",
+      "cefalo-4.jpeg",
+    ],
     projects: [
       {
         name: "Kontali (Aquaculture Analytics)",
@@ -83,6 +90,11 @@ export const EXPERIENCE: Experience[] = [
       "Developed a pipeline using Google Document AI to extract structured tabular data from medical diagnostic reports.",
       "Designed microservices using Python and PostgreSQL to serve NLP-derived insights to frontend applications.",
       "Collaborated with the R&D team to optimize ML model inference times for production use cases."
+    ],
+    images: [
+      "bs23-1.png",
+      "bs23-2.png",
+      "bs23-3.png",
     ]
   }
 ];

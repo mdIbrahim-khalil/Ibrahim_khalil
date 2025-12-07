@@ -22,6 +22,7 @@ export interface Experience {
     name: string;
     details: string[];
   }[];
+  images?: string[]; // Array of image URLs for the carousel
 }
 
 export interface Education {
